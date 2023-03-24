@@ -33,8 +33,11 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return SessionConst.LOGOUT_SUCCESS;
+    public String logout(HttpSession session, HttpServletRequest request) {
+        if (request.isRequestedSessionIdValid()) {
+            session.invalidate();
+            return SessionConst.LOGOUT_SUCCESS;
+        }
+        return SessionConst.NOT_LOGIN_STATE;
     }
 }
