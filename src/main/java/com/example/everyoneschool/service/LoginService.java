@@ -6,6 +6,7 @@ import com.example.everyoneschool.exception.LoginException;
 import com.example.everyoneschool.repository.LoginRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -15,13 +16,12 @@ public class LoginService {
     private final LoginRepository loginRepository;
 
     public LoginResponseDto login(LoginDto login) {
-        Long userId = loginRepository.findUserId(login.getUserName(), login.getPassword());
-
-        if (userId == null) {
+        try {
+            Long userId = loginRepository.findUserId(login.getUserName(), login.getPassword());
+            return new LoginResponseDto(userId, "success");
+        } catch (EmptyResultDataAccessException e) {
             log.info("LoginService.login.fail");
             throw new LoginException("Invalid Id");
         }
-
-        return new LoginResponseDto(userId, "success");
     }
 }
