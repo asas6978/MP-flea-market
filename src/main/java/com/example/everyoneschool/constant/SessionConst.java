@@ -1,4 +1,4 @@
-package com.example.everyoneschool.controller;
+package com.example.everyoneschool.constant;
 
 public abstract class SessionConst {
     public static final String LOGIN_USER = "loginUser";

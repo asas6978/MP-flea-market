@@ -1,5 +1,6 @@
 package com.example.everyoneschool.service;
 
+import com.example.everyoneschool.constant.UserConst;
 import com.example.everyoneschool.dto.LoginDto;
 import com.example.everyoneschool.dto.LoginResponseDto;
 import com.example.everyoneschool.exception.LoginException;
@@ -18,10 +19,10 @@ public class LoginService {
     public LoginResponseDto login(LoginDto login) {
         try {
             Long userId = loginRepository.findUserId(login.getUserName(), login.getPassword());
-            return new LoginResponseDto(userId, "success");
+            return new LoginResponseDto(userId, UserConst.LOGIN_SUCCESS);
         } catch (EmptyResultDataAccessException e) {
             log.info("LoginService.login.fail");
-            throw new LoginException("Invalid Id");
+            throw new LoginException(UserConst.INVALID_ID);
         }
     }
 }

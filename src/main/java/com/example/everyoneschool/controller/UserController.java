@@ -1,5 +1,6 @@
 package com.example.everyoneschool.controller;
 
+import com.example.everyoneschool.constant.SessionConst;
 import com.example.everyoneschool.dto.LoginDto;
 import com.example.everyoneschool.dto.LoginResponseDto;
 import com.example.everyoneschool.service.LoginService;
