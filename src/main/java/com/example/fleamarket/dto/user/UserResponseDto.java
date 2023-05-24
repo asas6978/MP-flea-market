@@ -1,11 +1,11 @@
-package com.example.everyoneschool.dto;
+package com.example.fleemarket.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class LoginResponseDto {
+public class UserResponseDto {
     private Long userId;
     private String message;
 }

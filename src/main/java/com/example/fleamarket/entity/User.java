@@ -1,4 +1,4 @@
-package com.example.everyoneschool.entity;
+package com.example.fleemarket.entity;
 
 import lombok.Data;
 
@@ -6,11 +6,11 @@ import javax.persistence.*;
 
 @Entity(name = "User")
 @Data
-public class Login {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long userId;
+    private Long userIdx;
 
     @Column(name = "username")
     private String userName;

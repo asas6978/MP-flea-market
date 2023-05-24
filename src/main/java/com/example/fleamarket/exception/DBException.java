@@ -1,4 +1,4 @@
-package com.example.everyoneschool.exception;
+package com.example.fleemarket.exception;
 
 public class DBException extends RuntimeException {
     public DBException() {
