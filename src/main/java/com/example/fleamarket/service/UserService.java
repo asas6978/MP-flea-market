@@ -1,14 +1,13 @@
-package com.example.fleemarket.service;
+package com.example.fleamarket.service;
 
-import com.example.fleemarket.constant.UserConst;
-import com.example.fleemarket.dto.user.UserDto;
-import com.example.fleemarket.dto.user.UserResponseDto;
-import com.example.fleemarket.entity.User;
-import com.example.fleemarket.exception.UserException;
-import com.example.fleemarket.repository.user.UserRepository;
+import com.example.fleamarket.constant.UserConst;
+import com.example.fleamarket.dto.user.UserDto;
+import com.example.fleamarket.dto.user.UserResponseDto;
+import com.example.fleamarket.entity.User;
+import com.example.fleamarket.exception.UserException;
+import com.example.fleamarket.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,13 +18,22 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
 
+    public UserResponseDto signup(UserDto userDto) {
+        try {
+            User saveUser = userRepository.save(new User(userDto.getUserName(), userDto.getPassword()));
+            return new UserResponseDto(saveUser.getUserIdx(), UserConst.SIGNUP_SUCCESS);
+        } catch (Exception e) {
+            throw new UserException(UserConst.SIGNUP_FAIL);
+        }
+    }
+
     public UserResponseDto login(UserDto login) {
         try {
-            Long userId = userRepository.findUserIdx(login.getUserName(), login.getPassword());
+            Long userId = userRepository.findUserByUserNameAndPassword(login.getUserName(), login.getPassword()).getUserIdx();
             return new UserResponseDto(userId, UserConst.LOGIN_SUCCESS);
-        } catch (EmptyResultDataAccessException e) {
+        } catch (Exception e) {
             log.info("LoginService.login.fail");
-            throw new UserException(UserConst.INVALID_ID);
+            throw new UserException(UserConst.LOGIN_FAIL);
         }
     }
 
