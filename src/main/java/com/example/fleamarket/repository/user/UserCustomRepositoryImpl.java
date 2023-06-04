@@ -1,6 +1,5 @@
-package com.example.fleemarket.repository.user;
+package com.example.fleamarket.repository.user;
 
-import com.example.fleemarket.repository.user.UserCustomRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

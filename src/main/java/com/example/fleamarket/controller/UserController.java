@@ -1,11 +1,11 @@
-package com.example.fleemarket.controller;
+package com.example.fleamarket.controller;
 
-import com.example.fleemarket.constant.SessionConst;
-import com.example.fleemarket.dto.user.UserDto;
-import com.example.fleemarket.dto.user.UserResponseDto;
-import com.example.fleemarket.entity.User;
-import com.example.fleemarket.exception.UserException;
-import com.example.fleemarket.service.UserService;
+import com.example.fleamarket.constant.SessionConst;
+import com.example.fleamarket.dto.user.UserDto;
+import com.example.fleamarket.dto.user.UserResponseDto;
+import com.example.fleamarket.entity.User;
+import com.example.fleamarket.exception.UserException;
+import com.example.fleamarket.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +19,20 @@ import javax.servlet.http.HttpSession;
 @RestController
 public class UserController {
     private final UserService userService;
+
+    @ResponseBody
+    @PostMapping("/signup")
+    public UserResponseDto signup(@RequestBody UserDto userDto, HttpServletRequest request) {
+        try {
+            UserResponseDto user = userService.signup(userDto);
+            HttpSession session = request.getSession();
+            session.setAttribute(SessionConst.LOGIN_USER, user);
+            return user;
+        } catch (Exception e) {
+            log.info("", e);
+            return new UserResponseDto(null, e.getMessage());
+        }
+    }
 
     @ResponseBody
     @PostMapping("/login")
