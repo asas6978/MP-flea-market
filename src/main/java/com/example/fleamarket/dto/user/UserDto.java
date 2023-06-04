@@ -1,4 +1,4 @@
-package com.example.fleemarket.dto.user;
+package com.example.fleamarket.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
