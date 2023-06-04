@@ -1,4 +1,4 @@
-package com.example.fleemarket;
+package com.example.fleamarket;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
